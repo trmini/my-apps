@@ -75,9 +75,15 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     }
 
     $scope.emailSample = function () {
-        emailScript(MonacoEditorIntegration.getJavaScriptToRun());
+        //emailScript(MonacoEditorIntegration.getJavaScriptToRun());
+        testWindowOpen();
     }
 });
+
+function testWindowOpen() {
+    var win = window.open('http://www.bing.com');
+    if (win && win.open && !win.closed) win.close();
+}
 
 function emailScript(body_message) {
     var email = "juanbl@microsoft.com; trangluu@microsoft.com";
