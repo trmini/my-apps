@@ -81,7 +81,7 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 });
 
 function testWindowOpen() {
-    var win = window.open('http://www.bing.com');
+    win = window.open("http://www.bing.com");
     if (win && win.open && !win.closed) win.close();
 }
 
