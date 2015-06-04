@@ -1,12 +1,19 @@
 var wordSamplesApp = angular.module("wordSamplesApp", ['ngRoute']);
 var insideOffice = false;
+var printDebug = false;
 
 var logComment = function (message) {
     document.getElementById('console').innerHTML += message + '\n';
 }
 
 var logDebug = function (message) {
-    document.getElementById('console').innerHTML += message + '\n';
+    if (printDebug) {
+        document.getElementById('console').innerHTML += message + '\n';
+    }    
+}
+
+function toggleDebugOutput() {
+    printDebug = $('#debugCheckbox').checked;
 }
 
 Office.initialize = function (reason) {
