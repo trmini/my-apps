@@ -746,6 +746,8 @@ var OfficeExtension;
         }
         OfficeJsRequestExecutor.prototype.executeAsync = function (customData, requestFlags, requestMessage, callback) {
             var requestMessageText = JSON.stringify(requestMessage.Body);
+            OfficeExtension.Utility.log("Request:");
+            OfficeExtension.Utility.log(requestMessageText);
             var messageSafearray = OfficeExtension.RichApiMessageUtility.buildRequestMessageSafeArray(customData, requestFlags, "POST", "ProcessQuery", null, requestMessageText);
             OSF.DDA.RichApi.executeRichApiRequestAsync(messageSafearray, function (result) {
                 OfficeExtension.Utility.log("Response:");
@@ -1167,6 +1169,10 @@ var OfficeExtension;
         Utility.log = function (message) {
             if (window.console && window.console.log) {
                 window.console.log(message);
+            }
+
+            if (logDebug) {
+                logDebug(message);
             }
         };
         return Utility;

@@ -5,6 +5,10 @@ var logComment = function (message) {
     document.getElementById('console').innerHTML += message + '\n';
 }
 
+var logDebug = function (message) {
+    document.getElementById('console').innerHTML += message + '\n';
+}
+
 Office.initialize = function (reason) {
     insideOffice = true;
     console.log('Initialized!');
