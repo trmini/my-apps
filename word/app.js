@@ -1,19 +1,15 @@
 var wordSamplesApp = angular.module("wordSamplesApp", ['ngRoute']);
 var insideOffice = false;
-var printDebug = false;
+var debugOption = false;
 
 var logComment = function (message) {
     document.getElementById('console').innerHTML += message + '\n';
 }
 
 var logDebug = function (message) {
-    if (printDebug) {
+    if (debugOption) {
         document.getElementById('console').innerHTML += message + '\n';
-    }    
-}
-
-function toggleDebugOutput() {
-    printDebug = $('#debugCheckbox').checked;
+    }
 }
 
 Office.initialize = function (reason) {
@@ -49,6 +45,7 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     $scope.samples = [{ name: "Loading..." }];
     $scope.selectedSample = { description: "No sample loaded" };
     $scope.insideOffice = insideOffice;
+    $scope.debugOption = { value: false };
 
     // Update to full path if word is not at the root folder
     MonacoEditorIntegration.initializeJsEditor('TxtRichApiScript', [
@@ -88,6 +85,10 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     $scope.emailSample = function () {
         //emailScript(MonacoEditorIntegration.getJavaScriptToRun());
         testWindowOpen();
+    }
+
+    $scope.toggleDebugOption = function () {
+        debugOption = $scope.debugOption.value;
     }
 });
 
