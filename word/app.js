@@ -26,6 +26,11 @@ Office.initialize = function (reason) {
         logDebug(message);
     };
 
+    // Log all unhandled exceptions
+    window.onerror = function (em, url, ln) {
+        logDebug("OnError: " + em + ", " + url + ", " + ln);
+    };
+
     console.log('Initialized!');
 };
 
@@ -91,8 +96,9 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     $scope.runSelectedSample = function () {
         var script = MonacoEditorIntegration.getJavaScriptToRun().replace("console.log", "logComment");
+        script = "try {" + script + "} catch(e) { logComment(\"Exception: \" + e.message ? e.message : e);}";
+
         logComment("====="); // Add separators between executions
-        script = "try {" + script + "} catch(e) { logDebug(\"e.message ? e.message : e\");}";
         eval(script);
     }
 
