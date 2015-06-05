@@ -4,6 +4,7 @@ var debugOption = false;
 
 var logComment = function (message) {
     var p = document.createElement('p');
+    p.className = 'message-text';
     p.innerHTML = message;
     $('#console').append(p);
 }
@@ -15,6 +16,7 @@ Office.initialize = function (reason) {
     window.console.log = function (message) {
         if (debugOption) {
             var p = document.createElement('p');
+            p.className = 'debug-text';
             p.innerHTML = message;
             $('#console').append(p);
         }
