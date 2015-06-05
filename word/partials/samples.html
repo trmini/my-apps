@@ -9,8 +9,8 @@
     </div>
     <div class="button_input">
         <p>
-            <button id="emailButton" ng-click="emailSample()">Email Sample...</button>
             <label><input type="checkbox" ng-model="debugOption.value" ng-change="toggleDebugOption()" />Debug</label>
+            <button id="clearButton" ng-click="clearLog()">Clear Log</button>
         </p>
         <p><button id="runButton" ng-hide="!insideOffice" ng-click="runSelectedSample()">Run!</button> <span>{{selectedSample.description}}</span></p>
     </div>

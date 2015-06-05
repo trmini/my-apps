@@ -44,8 +44,8 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
 wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFactory) {
     $scope.samples = [{ name: "Loading..." }];
     $scope.selectedSample = { description: "No sample loaded" };
-    $scope.insideOffice = insideOffice;
     $scope.debugOption = { value: false };
+    $scope.insideOffice = insideOffice;
 
     // Update to full path if word is not at the root folder
     MonacoEditorIntegration.initializeJsEditor('TxtRichApiScript', [
@@ -72,7 +72,6 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
         appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
         wordSamplesFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
             $scope.selectedSample.code = response.data;
-            $scope.insideOffice = insideOffice;
             MonacoEditorIntegration.setJavaScriptText($scope.selectedSample.code);
         });
     };
@@ -82,28 +81,11 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
         eval(script);
     }
 
-    $scope.emailSample = function () {
-        //emailScript(MonacoEditorIntegration.getJavaScriptToRun());
-        testWindowOpen();
-    }
-
     $scope.toggleDebugOption = function () {
         debugOption = $scope.debugOption.value;
     }
+
+    $scope.clearLog = function () {
+        document.getElementById('console').innerHTML = "";
+    }
 });
-
-function testWindowOpen() {
-    win = window.open("http://www.bing.com");
-    if (win && win.open && !win.closed) win.close();
-}
-
-function emailScript(body_message) {
-    var email = "juanbl@microsoft.com; trangluu@microsoft.com";
-    var subject = "Gemini Word APIs: Sample Code";
-
-    var mailto_link = 'mailto:' + email + '?subject=' + subject + '&body=' + body_message;
-
-    win = window.open(mailto_link, 'emailWindow');
-
-    if (win && win.open && !win.closed) win.close();
-}
