@@ -9,17 +9,26 @@ var logComment = function (message) {
     $('#console').append(span);
 }
 
+var logDebug = function (message) {
+    if (debugOption) {
+        var span = document.createElement('span');
+        span.className = 'debug-text';
+        span.innerHTML = message + '<br/>';
+        $('#console').append(span);
+    }
+}
+
 Office.initialize = function (reason) {
     insideOffice = true;
 
     // Override window.console to log framework debug info
     window.console.log = function (message) {
-        if (debugOption) {
-            var span = document.createElement('span');
-            span.className = 'debug-text';
-            span.innerHTML = message + '<br/>';
-            $('#console').append(span);
-        }
+        logDebug(message);
+    };
+
+    // Log all unhandled exceptions
+    window.onerror = function (em, url, ln) {
+        logDebug(em + ", " + url + ", " + ln);
     };
 
     console.log('Initialized!');
@@ -87,8 +96,9 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     $scope.runSelectedSample = function () {
         var script = MonacoEditorIntegration.getJavaScriptToRun().replace("console.log", "logComment");
-        eval(script);
         logComment("====="); // Add separators between executions
+        script = "try {" + script + "} catch(e) { logDebug(\"e.message ? e.message : e\");}";
+        eval(script);
     }
 
     $scope.toggleDebugOption = function () {
