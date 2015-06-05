@@ -72,6 +72,7 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
         appInsights.trackEvent("SampleLoaded", { name: $scope.selectedSample.name });
         wordSamplesFactory.getSampleCode($scope.selectedSample.filename).then(function (response) {
             $scope.selectedSample.code = response.data;
+            $scope.insideOffice = insideOffice;
             MonacoEditorIntegration.setJavaScriptText($scope.selectedSample.code);
         });
     };
