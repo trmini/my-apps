@@ -87,6 +87,7 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     $scope.runSelectedSample = function () {
         var script = MonacoEditorIntegration.getJavaScriptToRun().replace("console.log", "logComment");
+        logComment("====="); // Add separators between executions
         eval(script);
     }
 
@@ -95,6 +96,6 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     }
 
     $scope.clearLog = function () {
-        document.getElementById('console').innerHTML = "";
+        $('#console').empty();
     }
 });
