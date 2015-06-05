@@ -26,11 +26,6 @@ Office.initialize = function (reason) {
         logDebug(message);
     };
 
-    // Log all unhandled exceptions
-    window.onerror = function (em, url, ln) {
-        logDebug(em + ", " + url + ", " + ln);
-    };
-
     console.log('Initialized!');
 };
 
