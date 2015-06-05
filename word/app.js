@@ -3,10 +3,10 @@ var insideOffice = false;
 var debugOption = false;
 
 var logComment = function (message) {
-    var p = document.createElement('p');
-    p.className = 'message-text';
-    p.innerHTML = message;
-    $('#console').append(p);
+    var span = document.createElement('span');
+    span.className = 'message-text';
+    span.innerHTML = message + '<br/>';
+    $('#console').append(span);
 }
 
 Office.initialize = function (reason) {
@@ -15,10 +15,10 @@ Office.initialize = function (reason) {
     // Override window.console to log framework debug info
     window.console.log = function (message) {
         if (debugOption) {
-            var p = document.createElement('p');
-            p.className = 'debug-text';
-            p.innerHTML = message;
-            $('#console').append(p);
+            var span = document.createElement('span');
+            span.className = 'debug-text';
+            span.innerHTML = message + '<br/>';
+            $('#console').append(span);
         }
     };
 
