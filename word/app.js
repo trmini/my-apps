@@ -3,17 +3,23 @@ var insideOffice = false;
 var debugOption = false;
 
 var logComment = function (message) {
-    document.getElementById('console').innerHTML += message + '\n';
-}
-
-var logDebug = function (message) {
-    if (debugOption) {
-        document.getElementById('console').innerHTML += message + '\n';
-    }
+    var p = document.createElement('p');
+    p.innerHTML = message;
+    $('#console').append(p);
 }
 
 Office.initialize = function (reason) {
     insideOffice = true;
+
+    // Override window.console to log framework debug info
+    window.console.log = function (message) {
+        if (debugOption) {
+            var p = document.createElement('p');
+            p.innerHTML = message;
+            $('#console').append(p);
+        }
+    };
+
     console.log('Initialized!');
 };
 

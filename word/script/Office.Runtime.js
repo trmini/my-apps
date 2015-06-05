@@ -1170,10 +1170,6 @@ var OfficeExtension;
             if (window.console && window.console.log) {
                 window.console.log(message);
             }
-
-            if (logDebug) {
-                logDebug(message);
-            }
         };
         return Utility;
     })();
