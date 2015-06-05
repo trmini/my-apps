@@ -87,8 +87,8 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     $scope.runSelectedSample = function () {
         var script = MonacoEditorIntegration.getJavaScriptToRun().replace("console.log", "logComment");
-        logComment("====="); // Add separators between executions
         eval(script);
+        logComment("====="); // Add separators between executions
     }
 
     $scope.toggleDebugOption = function () {
