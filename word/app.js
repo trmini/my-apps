@@ -98,7 +98,7 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     $scope.samples = [{ name: "Loading..." }];
     $scope.builds = [{ build: "4229.1000"}, { build: "4220"}, { build : "4201"}];
     $scope.selectedSample = { description: "No sample loaded" };
-    $scope.selectedBuild = $scope.builds[0];
+    $scope.selectedBuild = $scope.builds[0].build;
     $scope.debugOption = { value: false };
     $scope.insideOffice = insideOffice;
 
