@@ -1,0 +1,13 @@
+{
+    "values": [
+        { "done": true, "filename": "getParagraphs.js", "name": "Get Paragraphs", "group": "Paragraph", "description": "Get all paragraphs and print out the length of individual paragraphs." },
+        { "done": true, "filename": "setParagraphProperties.js", "name": "Set Paragraph Properties", "group": "Paragraph", "description": "Set paragraph properties." }
+    ],
+    "groups": [
+        { "name": "Paragraph" },
+        { "name": "Others" }
+    ],
+    "suggestions": [
+        { "missing": false, "done": false, "filename": "findAndReplace.js", "name": "Find Text and Replace", "description": "" }
+    ]
+}

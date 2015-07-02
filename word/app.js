@@ -62,7 +62,7 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
 wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFactory) {
     $scope.samples = [{ name: "Loading..." }];
     $scope.selectedSample = { description: "No sample loaded" };
-    $scope.selectedBuild = "4229.1000";
+    $scope.selectedBuild = officeVersion;
     $scope.debugOption = { value: false };
     $scope.insideOffice = insideOffice;
 
@@ -114,5 +114,11 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     
     $scope.switchOfficeVersion = function() {
         officeVersion = $scope.selectedBuild;
+        
+        // Refresh samples
+        wordSamplesFactory.getSamples().then(function (response) {
+            $scope.samples = response.data.values;
+            $scope.groups = response.data.groups;
+        });
     }
 });
