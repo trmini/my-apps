@@ -68,8 +68,8 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     // Update to full path if word is not at the root folder
     MonacoEditorIntegration.initializeJsEditor('TxtRichApiScript', [
-            "/word/script/EditorIntelliSense/WordLatest.txt",
-            "/word/script/EditorIntelliSense/Office.Runtime.txt",
+            "/word/script/EditorIntelliSense/" + officeVersion + "/WordLatest.txt",
+            "/word/script/EditorIntelliSense/" + officeVersion + "/Office.Runtime.txt",
             "/word/script/EditorIntelliSense/Helpers.txt",
             "/word/script/EditorIntelliSense/jquery.txt",
     ]);
@@ -115,10 +115,20 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     $scope.switchOfficeVersion = function() {
         officeVersion = $scope.selectedBuild;
         
-        // Refresh samples
+        // Update samples
         wordSamplesFactory.getSamples().then(function (response) {
             $scope.samples = response.data.values;
             $scope.groups = response.data.groups;
         });
+        
+        // Update IntelliSense
+        MonacoEditorIntegration.initializeJsEditor('TxtRichApiScript', [
+                "/word/script/EditorIntelliSense/" + officeVersion + "/WordLatest.txt",
+                "/word/script/EditorIntelliSense/" + officeVersion + "/Office.Runtime.txt",
+                "/word/script/EditorIntelliSense/Helpers.txt",
+                "/word/script/EditorIntelliSense/jquery.txt",
+        ]);
+        
+        // Reload JS files
     }
 });
