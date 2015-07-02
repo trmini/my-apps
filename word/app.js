@@ -1,6 +1,7 @@
 var wordSamplesApp = angular.module("wordSamplesApp", ['ngRoute']);
 var insideOffice = false;
 var debugOption = false;
+var officeVersion = "4229.1000";
 
 var logComment = function (message) {
     var span = document.createElement('span');
@@ -48,11 +49,11 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
     var factory = {};
 
     factory.getSamples = function () {
-        return $http.get('samples/samples.json');
+        return $http.get('samples/' + officeVersion + '/' + samples.json');
     };
 
     factory.getSampleCode = function (filename) {
-        return $http.get('samples/' + filename);
+        return $http.get('samples/' + officeVersion + '/' + filename);
     };
 
     return factory;
@@ -61,7 +62,7 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
 wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFactory) {
     $scope.samples = [{ name: "Loading..." }];
     $scope.selectedSample = { description: "No sample loaded" };
-    $scope.selectedBuild = { description: "Latest" };
+    $scope.selectedBuild = "4229.1000";
     $scope.debugOption = { value: false };
     $scope.insideOffice = insideOffice;
 
@@ -112,6 +113,6 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
     }
     
     $scope.switchOfficeVersion = function() {
-        logComment($scope.selectedBuild.name);
+        officeVersion = $scope.selectedBuild;
     }
 });
