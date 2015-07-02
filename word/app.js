@@ -45,7 +45,7 @@ function replaceJSFile (oldFilename, newFilename) {
     for (var i = allScripts.length; i >= 0; i--) {
         if (allScripts[i]) {
             var sourceFilename = allScripts[i].getAttribute("src");
-            if (sourceFileName != null && sourceFileName.indexOf(oldFilename) != -1) {
+            if (sourceFilename != null && sourceFilename.indexOf(oldFilename) != -1) {
                 var newElement = createJSFile(newFilename);
                 allScripts[i].parentNode.replaceChild(newElement, allScripts[i]);
                 return;
