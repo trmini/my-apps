@@ -31,6 +31,29 @@ function initializeMonacoEditor() {
     ]);
 }
 
+function createJSFile (filename) {
+    var fileRef = document.createElement('script');
+    fileRef.setAttribute("type","text/javascript");
+    fileRef.setAttribute("src", filename);
+
+    return fileRef;
+}
+
+function replaceJSFile (oldFilename, newFilename) {
+    var allScripts = document.getElementsByTagName("script");
+
+    for (var i = allScripts.length; i >= 0; i--) {
+        if (allScripts[i]) {
+            var sourceFilename = allScripts[i].getAttribute("src");
+            if (sourceFileName != null && sourceFileName.indexOf(oldFilename) != -1) {
+                var newElement = createJSFile(newFilename);
+                allScripts[i].parentNode.replaceChild(newElement, allScripts[i]);
+                return;
+            }
+        }
+    }
+}
+
 Office.initialize = function (reason) {
     insideOffice = true;
 
@@ -85,6 +108,8 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
         initializeMonacoEditor();
         
         // Reload JS files
+        replaceJSFile('Office.Runtime.js', 'script/' + officeVersion + '/Office.Runtime.js');
+        replaceJSFile('Word.js', 'script/' + officeVersion + '/Word.js');
         
         // Reload samples
         wordSamplesFactory.getSamples().then(function (response) {
