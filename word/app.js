@@ -96,14 +96,14 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
 
 wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFactory) {
     $scope.samples = [{ name: "Loading..." }];
-    $scope.builds = [{ build: "4229.1000"}, { build: "4220"}, { build : "4201"}];
+    $scope.builds = [{ name: "4229.1000"}, { name: "4220"}, { name : "4201"}];
     $scope.selectedSample = { description: "No sample loaded" };
-    $scope.selectedBuild = $scope.builds[0].build;
+    $scope.selectedBuild = $scope.builds[0];
     $scope.debugOption = { value: false };
     $scope.insideOffice = insideOffice;
 
     $scope.switchOfficeVersion = function() {
-        officeVersion = $scope.selectedBuild;
+        officeVersion = $scope.selectedBuild.name;
 
         // Reload Monaco Editor
         initializeMonacoEditor();
