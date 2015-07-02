@@ -49,7 +49,7 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
     var factory = {};
 
     factory.getSamples = function () {
-        return $http.get('samples/' + officeVersion + '/' + samples.json');
+        return $http.get('samples/' + officeVersion + '/samples.json');
     };
 
     factory.getSampleCode = function (filename) {
