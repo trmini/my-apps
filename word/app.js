@@ -61,6 +61,7 @@ wordSamplesApp.factory("wordSamplesFactory", ['$http', function ($http) {
 wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFactory) {
     $scope.samples = [{ name: "Loading..." }];
     $scope.selectedSample = { description: "No sample loaded" };
+    $scope.selectedBuild = { description: "Latest" };
     $scope.debugOption = { value: false };
     $scope.insideOffice = insideOffice;
 
@@ -108,5 +109,9 @@ wordSamplesApp.controller("SamplesController", function ($scope, wordSamplesFact
 
     $scope.clearLog = function () {
         $('#console').empty();
+    }
+    
+    $scope.switchOfficeVersion = function() {
+        logComment($scope.selectedBuild.name);
     }
 });
